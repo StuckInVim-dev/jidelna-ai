@@ -25,6 +25,7 @@ services:
       POSTGRES_DB: jidelna_ai
     volumes:
       - jidelna_ai_postgres:/var/lib/postgresql/data
+      - ./db/init:/docker-entrypoint-initdb.d
     networks:
       - jidelna_ai_network
     hostname: postgres

@@ -9,6 +9,9 @@ services:
       - NODE_ENV=development
       - NEXT_TELEMETRY_DISABLED=1
     restart: unless-stopped
+    networks:
+      - jidelna_ai_network
+    hostname: next
 
     develop:
       watch:
@@ -19,3 +22,24 @@ services:
             - node_modules/
         - action: rebuild
           path: package.json
+
+
+  postgres:
+    image: postgres:latest
+    container_name: jidelna_ai_postgres
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: jidelna_ai
+    volumes:
+      - jidelna_ai_postgres:/var/lib/postgresql/data
+      - ./db/init:/docker-entrypoint-initdb.d
+    networks:
+      - jidelna_ai_network
+    hostname: postgres
+
+volumes:
+  jidelna_ai_postgres:
+
+networks:
+  jidelna_ai_network:
