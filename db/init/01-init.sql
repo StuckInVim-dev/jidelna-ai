@@ -6,6 +6,7 @@ CREATE TABLE users (
   api_username VARCHAR(100),
   api_password VARCHAR(100),
   api_canteen_id VARCHAR(100),
+  session_ids TEXT[] DEFAULT '{}',
   preferences JSONB DEFAULT '{
     "salty": 0,
     "sweet": 0,

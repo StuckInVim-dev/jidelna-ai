@@ -1,5 +1,7 @@
-const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');
+import bcrypt from 'bcryptjs';
+import jwt from 'jsonwebtoken';
+import { randomBytes } from 'crypto';
+
 
 const JWT_SECRET = 'your-secret-key';
 
@@ -24,3 +26,6 @@ export function verifyToken(token: any) {
   }
 }
 
+export const generateSessionId = (): string => {
+    return randomBytes(32).toString('hex');
+  };
