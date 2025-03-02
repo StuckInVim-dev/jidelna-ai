@@ -1,11 +1,36 @@
 services:
+
   next:
     build: 
       context: .
       dockerfile: Dockerfile
+    container_name: jidelna_ai_next
     ports:
       - "3000:3000"
     environment:
       - NODE_ENV=production
       - NEXT_TELEMETRY_DISABLED=1
     restart: unless-stopped
+    networks:
+      - jidelna_ai_network
+    hostname: next
+
+
+  postgres:
+    image: postgres:latest
+    container_name: jidelna_ai_postgres
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: jidelna_ai
+    volumes:
+      - jidelna_ai_postgres:/var/lib/postgresql/data
+    networks:
+      - jidelna_ai_network
+    hostname: postgres
+
+volumes:
+  jidelna_ai_postgres:
+
+networks:
+  jidelna_ai_network:
