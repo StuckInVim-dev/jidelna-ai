@@ -1,21 +1,5 @@
 services:
 
-  next:
-    build: 
-      context: .
-      dockerfile: Dockerfile
-    container_name: jidelna_ai_next
-    ports:
-      - "3000:3000"
-    environment:
-      - NODE_ENV=production
-      - NEXT_TELEMETRY_DISABLED=1
-    restart: unless-stopped
-    networks:
-      - jidelna_ai_network
-    hostname: next
-
-
   postgres:
     image: postgres:latest
     container_name: jidelna_ai_postgres
@@ -28,6 +12,20 @@ services:
     networks:
       - jidelna_ai_network
     hostname: postgres
+    
+  next:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - NEXT_TELEMETRY_DISABLED=1
+    restart: unless-stopped
+    networks:
+      - jidelna_ai_network
+    hostname: next
 
 
 networks:

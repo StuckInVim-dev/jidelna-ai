@@ -1,6 +1,20 @@
 services:
+
+  postgres:
+    image: postgres:latest
+    container_name: jidelna_ai_postgres
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: jidelna_ai
+    volumes:
+      - ./volumes/postgres:/var/lib/postgresql/data
+    networks:
+      - jidelna_ai_network
+    hostname: postgres
+    
   next:
-    build: 
+    build:
       context: .
       dockerfile: Dockerfile-dev
     ports:
@@ -23,18 +37,6 @@ services:
         - action: rebuild
           path: package.json
 
-  postgres:
-    image: postgres:latest
-    container_name: jidelna_ai_postgres
-    environment:
-      POSTGRES_USER: user
-      POSTGRES_PASSWORD: password
-      POSTGRES_DB: jidelna_ai
-    volumes:
-      - ./volumes/postgres:/var/lib/postgresql/data
-    networks:
-      - jidelna_ai_network
-    hostname: postgres
 
 networks:
   jidelna_ai_network:
