@@ -12,7 +12,7 @@ services:
     networks:
       - jidelna_ai_network
     hostname: postgres
-    
+
   next:
     build:
       context: .
@@ -22,7 +22,7 @@ services:
     environment:
       - NODE_ENV=development
       - NEXT_TELEMETRY_DISABLED=1
-    restart: unless-stopped
+    # restart: unless-stopped
     networks:
       - jidelna_ai_network
     hostname: next

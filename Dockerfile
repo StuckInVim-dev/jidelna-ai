@@ -36,8 +36,12 @@ COPY --from=build /app/.next ./.next
 COPY --from=build /app/node_modules ./node_modules
 COPY --from=build /app/public ./public
 
+# Copy entrypoint script
+COPY entrypoint.sh /app/
+RUN chmod +x /app/entrypoint.sh
+
 # Expose port
 EXPOSE 3000
 
 # Start the application
-CMD ["pnpm", "run", "start"]
+CMD ["ash", "/app/entrypoint.sh"]
