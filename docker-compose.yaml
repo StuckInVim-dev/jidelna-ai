@@ -24,13 +24,11 @@ services:
       POSTGRES_PASSWORD: password
       POSTGRES_DB: jidelna_ai
     volumes:
-      - jidelna_ai_postgres:/var/lib/postgresql/data
+      - ./volumes/postgres:/var/lib/postgresql/data
     networks:
       - jidelna_ai_network
     hostname: postgres
 
-volumes:
-  jidelna_ai_postgres:
 
 networks:
   jidelna_ai_network:
