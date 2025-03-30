@@ -23,6 +23,13 @@ export default function Register() {
                         placeholder="Enter your password"
                     />
                 </div>
+                <div className="mb-6">
+                    <input
+                        type="password"
+                        className="border rounded w-full py-2 px-3 text-gray-700"
+                        placeholder="Enter your password again"
+                    />
+                </div>
                 <button
                     type="submit"
                     className="bg-blue-500 text-white w-full py-2 rounded hover:bg-blue-600"
