@@ -7,16 +7,18 @@ export default function Home() {
     const [selectedMeal, setSelectedMeal] = useState<string | null>(null);
     const [preferences, setPreferences] = useState({
         vegetarian: false,
-        allergies: "",
+        allergies: [] as string[],
         meatPreference: "any", // New preference for meat type
     });
+
+    const allergensList = ["vejce", "mléko", "lepek", "ořechy", "ryby"];
 
     // Define meals with properties
     const meals = [
         { name: "Kuřecí řízek", vegetarian: false, meat: "chicken", ingredients: ["kuřecí maso", "strouhanka", "vejce"] },
-        { name: "Vegetariánské lasagne", vegetarian: true, meat: null, ingredients: ["těstoviny", "rajčata", "sýr"] },
+        { name: "Vegetariánské lasagne", vegetarian: true, meat: null, ingredients: ["těstoviny", "rajčata", "sýr", "mléko"] },
         { name: "Hovězí guláš", vegetarian: false, meat: "beef", ingredients: ["hovězí maso", "cibule", "paprika"] },
-        { name: "Salát s tuňákem", vegetarian: false, meat: "fish", ingredients: ["tuňák", "salát", "rajčata"] },
+        { name: "Salát s tuňákem", vegetarian: false, meat: "fish", ingredients: ["tuňák", "salát", "rajčata", "ryby"] },
     ];
 
     const selectMeal = () => {
@@ -32,7 +34,7 @@ export default function Home() {
                 return false;
             }
             if (preferences.allergies) {
-                const allergies = preferences.allergies.toLowerCase().split(",").map(a => a.trim());
+                const allergies = preferences.allergies.map(allergy => allergy.toLowerCase().trim());
                 return !allergies.some(allergy => meal.ingredients.some(ingredient => ingredient.toLowerCase().includes(allergy)));
             }
             return true;
@@ -45,6 +47,14 @@ export default function Home() {
         } else {
             setSelectedMeal("Žádné jídlo neodpovídá vašim preferencím.");
         }
+    };
+    const toggleAllergy = (allergy: string) => {
+        setPreferences((prev) => {
+            const allergies = prev.allergies.includes(allergy)
+                ? prev.allergies.filter((a) => a !== allergy)
+                : [...prev.allergies, allergy];
+            return { ...prev, allergies };
+        });
     };
 
     return (
@@ -106,13 +116,19 @@ export default function Home() {
                     {/* Allergies */}
                     <div className="mb-4">
                         <label className="block text-black font-medium mb-2">Alergie:</label>
-                        <input
-                            type="text"
-                            value={preferences.allergies}
-                            onChange={(e) => setPreferences({ ...preferences, allergies: e.target.value })}
-                            className="border rounded w-full py-2 px-3 text-black"
-                            placeholder="Zadejte alergie (např. vejce, mléko)"
-                        />
+                        <div className="flex flex-wrap gap-2">
+                            {allergensList.map((allergy) => (
+                                <label key={allergy} className="flex items-center text-black">
+                                    <input
+                                        type="checkbox"
+                                        checked={preferences.allergies.includes(allergy)}
+                                        onChange={() => toggleAllergy(allergy)}
+                                        className="mr-2"
+                                    />
+                                    {allergy}
+                                </label>
+                            ))}
+                        </div>
                     </div>
 
                     {/* Select meal button */}
