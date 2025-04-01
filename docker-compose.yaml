@@ -1,10 +1,22 @@
 services:
 
+  postgres:
+    image: postgres:latest
+    container_name: jidelna_ai_postgres
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: jidelna_ai
+    volumes:
+      - ./volumes/postgres:/var/lib/postgresql/data
+    networks:
+      - jidelna_ai_network
+    hostname: postgres
+    
   next:
-    build: 
+    build:
       context: .
       dockerfile: Dockerfile
-    container_name: jidelna_ai_next
     ports:
       - "3000:3000"
     environment:
@@ -15,22 +27,6 @@ services:
       - jidelna_ai_network
     hostname: next
 
-
-  postgres:
-    image: postgres:latest
-    container_name: jidelna_ai_postgres
-    environment:
-      POSTGRES_USER: user
-      POSTGRES_PASSWORD: password
-      POSTGRES_DB: jidelna_ai
-    volumes:
-      - jidelna_ai_postgres:/var/lib/postgresql/data
-    networks:
-      - jidelna_ai_network
-    hostname: postgres
-
-volumes:
-  jidelna_ai_postgres:
 
 networks:
   jidelna_ai_network:
