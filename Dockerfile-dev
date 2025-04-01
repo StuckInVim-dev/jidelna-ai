@@ -22,8 +22,12 @@ RUN pnpm install --frozen-lockfile
 # Copy the rest of the codebase
 COPY --chown=build:build_group . .
 
+# Copy development entrypoint script
+COPY --chown=build:build_group entrypoint-dev.sh /app/entrypoint-dev.sh
+RUN chmod +x /app/entrypoint-dev.sh
+
 # Epose development port
 EXPOSE 3000
 
 # Run development 
-CMD ["pnpm", "run", "dev"]
+CMD ["ash", "/app/entrypoint-dev.sh"]
