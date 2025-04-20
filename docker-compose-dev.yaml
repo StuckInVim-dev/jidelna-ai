@@ -7,6 +7,8 @@ services:
       POSTGRES_USER: user
       POSTGRES_PASSWORD: password
       POSTGRES_DB: jidelna_ai
+    ports:
+      - "5432:5432"
     volumes:
       - ./volumes/postgres:/var/lib/postgresql/data
     networks:
@@ -23,6 +25,8 @@ services:
       - NODE_ENV=development
       - NEXT_TELEMETRY_DISABLED=1
     # restart: unless-stopped
+    volumes:
+      - ./prisma/migrations:/app/prisma/migrations
     networks:
       - jidelna_ai_network
     hostname: next
