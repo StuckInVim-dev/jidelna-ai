@@ -1,5 +1,14 @@
 import { PrismaClient } from '@prisma/client';
 
+// USAGE:
+// Get today's menu
+// const menu = await stravaService.getTodaysMenu();
+
+// Auto-order lunch for a user
+// await autoOrderLunch(userId);
+
+
+
 const prisma = new PrismaClient();
 
 interface Allergen {
