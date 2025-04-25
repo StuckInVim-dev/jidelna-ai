@@ -1,4 +1,3 @@
-// lib/auth/auth.ts
 import NextAuth, { type DefaultSession } from "next-auth";
 import GithubProvider from "next-auth/providers/github";
 import { prisma } from '@/lib/prisma';
