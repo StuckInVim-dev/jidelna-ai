@@ -64,6 +64,8 @@ model User {
   image         String?
   accounts      Account[]
   sessions      Session[]
+  preferences     UserPreferences?
+  dailySelections UserSelection[]
 }
 
 model VerificationToken {
@@ -72,4 +74,42 @@ model VerificationToken {
   expires    DateTime
 
   @@unique([identifier, token])
+}
+
+model UserPreferences {
+  id          String   @id @default(cuid())
+  userId      String   @unique
+  user        User     @relation(fields: [userId], references: [id])
+  
+  // Dietary flags
+  vegetarian  Boolean  @default(false)
+  vegan       Boolean  @default(false)
+  glutenFree  Boolean  @default(false)
+  
+  // Allergens (using Strava's codes)
+  allergens   String[] // Array like ["A","B","C"]
+  
+  // Favorite dish names (for pattern matching)
+  favorites   String[] // Example: ["Kuřecí řízek", "Svíčková"]
+  
+  // Auto-order settings
+  autoOrder   Boolean  @default(false)
+  notify      Boolean  @default(true)
+  
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model UserSelection {
+  id          String   @id @default(cuid())
+  userId      String
+  user        User     @relation(fields: [userId], references: [id])
+  
+  date        DateTime @unique // Date of lunch (only one per day)
+  menuItemId  String   // Strava's ID
+  status      String   // "auto" | "manual" | "canceled"
+  dishData    Json     // Full snapshot of menu item
+  
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 }
