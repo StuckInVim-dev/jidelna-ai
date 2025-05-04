@@ -7,6 +7,12 @@ interface Props {
     }
 }
 
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+    const user = await prisma.user.findUnique({where: {id: params.id}});
+    return {
+        title: `${user?.name}'s Profile`
+    }
+}
 
 export default async function IdProfile({ params }: Props) {
     const user = await prisma.user.findUnique({ where: { id: params.id } })
