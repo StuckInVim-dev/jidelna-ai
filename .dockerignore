@@ -1,7 +1,0 @@
-# Docker ignore from: https://github.com/selfup/nextjs-docker/blob/master/.dockerignore
-.git
-.results
-scripts
-*Dockerfile*
-node_modules
-volumes/*

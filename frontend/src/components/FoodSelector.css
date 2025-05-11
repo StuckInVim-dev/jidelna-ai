@@ -1,0 +1,153 @@
+.food-selector-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.selector-controls {
+    background-color: #f8f9fa;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    align-items: flex-end;
+}
+
+.form-group {
+    margin-bottom: 0;
+    flex: 1;
+    min-width: 200px;
+}
+
+.recommendations-section {
+    margin-top: 30px;
+}
+
+.recommendations-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.recommendation-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.recommendation-details {
+    display: flex;
+    flex-direction: column;
+}
+
+.item-name {
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+
+.item-id {
+    color: #6c757d;
+    font-size: 0.9rem;
+}
+
+.preferences-summary {
+    margin-top: 30px;
+    padding: 20px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+}
+
+.preferences-summary ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.preferences-summary li {
+    margin-bottom: 10px;
+    padding-left: 20px;
+    position: relative;
+}
+
+.preferences-summary li:before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    color: #007bff;
+}
+
+.btn-sm {
+    padding: 5px 10px;
+    font-size: 0.875rem;
+}
+
+.btn-success {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.btn-success:hover {
+    background-color: #218838;
+}
+
+.btn-success:disabled {
+    background-color: #6c757d;
+    cursor: not-allowed;
+}
+
+.error-message {
+    color: #dc3545;
+    background-color: #f8d7da;
+    padding: 10px;
+    border-radius: 4px;
+    margin-bottom: 15px;
+}
+
+.success-message {
+    color: #28a745;
+    background-color: #d4edda;
+    padding: 10px;
+    border-radius: 4px;
+    margin-bottom: 15px;
+}
+
+.disclaimer-box {
+    background-color: #f8f9fa;
+    border-left: 4px solid #17a2b8;
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 4px;
+}
+
+.disclaimer-box p {
+    margin: 0;
+    color: #495057;
+    font-size: 0.95rem;
+}
+
+.allergies-checklist {
+    margin-top: 8px;
+    margin-left: 15px;
+}
+
+.allergy-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+.allergy-item input[type="checkbox"] {
+    margin-right: 8px;
+}
+
+.allergy-item label {
+    cursor: default;
+}

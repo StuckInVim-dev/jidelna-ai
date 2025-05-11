@@ -1,1 +1,0 @@
-export const signInUrl = "/api/auth/signin"
